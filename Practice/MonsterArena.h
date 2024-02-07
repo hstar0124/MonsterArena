@@ -13,15 +13,16 @@ private:
 	vector<Monster*> monsters;
 
 public:
-	MonsterArena(int maxMonsters);
+	MonsterArena();
 	~MonsterArena();
 	void AddMonster(Monster* m);
 	void PrintMonsters() const;
 	void GoToRound();
 	void Play();
+	void Init();
 
 private:
-	bool IsMonsterAreanaAvailable() const;
+	bool IsMonsterArenaAvailable() const;
 };
 
 #endif

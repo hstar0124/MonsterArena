@@ -22,6 +22,7 @@ private:
 	ElementalProperties elemental;
 
 public:
+	Monster();
 	Monster(string name, int hp, int attack, int defense, ElementalProperties elemental);
 	Monster(string name, int hp, int attack, int defense, const string& elementalStr);
 	~Monster();

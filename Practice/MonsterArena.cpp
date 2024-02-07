@@ -1,10 +1,11 @@
 #include "MonsterArena.h"
 #include <iostream>
+#include <string>
 
 using namespace std;
 
-MonsterArena::MonsterArena(int maxMonsters)
-	:maxMonsters(maxMonsters)
+MonsterArena::MonsterArena()
+	:maxMonsters(0)
 {
 	cout << "몬스터 아레나가 열렸습니다!" << endl;
 }
@@ -39,7 +40,7 @@ void MonsterArena::PrintMonsters() const
 	}
 }
 
-bool MonsterArena::IsMonsterAreanaAvailable() const
+bool MonsterArena::IsMonsterArenaAvailable() const
 {
 	return monsters.size() > 1;
 }
@@ -72,6 +73,40 @@ void MonsterArena::GoToRound()
 	}
 }
 
+void MonsterArena::Init()
+{
+	cout << "몬스터 아레나에 오신 것을 환영합니다!" << endl;
+
+	int inputMaxMonster = -999;
+	do {
+		cout << "몬스터 아레나에 참가할 몬스터 숫자를 입력해주세요(ex : 1 ~ 10) >> ";
+		cin >> inputMaxMonster;
+	} while (inputMaxMonster < 1 || inputMaxMonster > 10);
+
+	maxMonsters = inputMaxMonster;
+
+	for (int i = 0; i < maxMonsters; i++)
+	{
+		string name;
+		int health, attack, defense;
+		string element;
+
+		cout << "몬스터 " << i + 1 << "의 이름을 입력하세요: ";
+		cin >> name;
+		cout << "몬스터 " << i + 1 << "의 체력을 입력하세요: ";
+		cin >> health;
+		cout << "몬스터 " << i + 1 << "의 공격력을 입력하세요: ";
+		cin >> attack;
+		cout << "몬스터 " << i + 1 << "의 방어력을 입력하세요: ";
+		cin >> defense;
+		cout << "몬스터 " << i + 1 << "의 속성을 입력하세요(FIRE,WATER,EARTH,WIND): ";
+		cin >> element;
+
+		Monster* monster = new Monster(name, health, attack, defense, element);
+		AddMonster(monster);
+	}
+}
+
 void MonsterArena::Play()
 {
 	if (monsters.empty())
@@ -82,7 +117,7 @@ void MonsterArena::Play()
 
 	cout << "몬스터 아레나가 시작됩니다!" << endl;
 
-	while (IsMonsterAreanaAvailable())
+	while (IsMonsterArenaAvailable())
 	{
 		cout << endl;
 		cout << "================================" << endl;
